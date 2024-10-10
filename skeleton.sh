@@ -16,7 +16,7 @@ elif [ -e "./idx-sh/___CODEBASE___.sh" ]; then
 elif [ -e "./___CODEBASE___.sh" ]; then
     SRC_DIR=../..
 else
-    echo "ERROR - ___CODEBASE___.sh should be contained in $/___CODE_BASE___/debug/idx-sh"
+    echo "ERROR - ___CODEBASE___.sh should be contained in $/___CODEBASE___/debug/idx-sh"
     exit
 fi
 
@@ -33,11 +33,12 @@ sed -e '/\/debug\//d' ./debug/.part.000.tmp     >   ./debug/.part.001.tmp
 find ./___PATH___ -name "*.[chS]"    >   ./debug/.part.002.tmp
 
 # Sum up.
+# NOTE: must be the last part(s) here.
 cat ./debug/.part.001.tmp   >   ./debug/.sum.tmp
 cat ./debug/.part.002.tmp   >>  ./debug/.sum.tmp
 
-# sort it and save into ./debug/idx-to-src.
-cat ./debug/.sum.tmp | sort  >   ./debug/idx-to-src
+# sort it and save into ./debug/src-to-idx.
+cat ./debug/.sum.tmp | sort  >   ./debug/src-to-idx
 
 # Index.
 cscope -Rkb -i ./debug/src-to-idx &
